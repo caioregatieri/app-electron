@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="
+        default-src 'self' data: gap: https: http://localhost:8080 'unsafe-eval';
+        style-src 'self' 'unsafe-inline' *;
+        img-src 'self' data: cid: https: http: *;
+        font-src 'self' data: https: http: *;
+        media-src 'self' https: 'unsafe-inline' *;
+        script-src 'self' https: 'unsafe-eval' 'unsafe-inline' *;
+        connect-src 'self' wss: *;
+      "
+    />
+  </head>
+
+  <body>
+    <app></app>
+    <script type="module" src="index.tsx"></script>
+  </body>
+</html>
