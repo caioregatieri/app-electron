@@ -5,9 +5,12 @@ import injectProcessEnvPlugin from 'rollup-plugin-inject-process-env'
 import tsconfigPathsPlugin from 'vite-tsconfig-paths'
 import reactPlugin from '@vitejs/plugin-react'
 
+// yarn add --dev @esbuild-plugins/node-globals-polyfill
 import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill'
+// yarn add --dev @esbuild-plugins/node-modules-polyfill
 import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
-import rollupNodePolyFill from 'rollup-plugin-node-polyfills'
+// You don't need to add this to deps, it's included by @esbuild-plugins/node-modules-polyfill
+import rollupNodePolyFill from "rollup-plugin-node-polyfills";
 
 import { main, resources } from './package.json'
 
@@ -55,7 +58,10 @@ export default defineConfig({
 
     publicDir: resolve(resources, 'public'),
 
-    plugins: [tsconfigPaths, reactPlugin()],
+    plugins: [
+      tsconfigPaths,
+      reactPlugin(),
+    ],
 
     resolve: {
       alias: {
@@ -76,16 +82,11 @@ export default defineConfig({
         os: 'rollup-plugin-node-polyfills/polyfills/os',
         assert: 'rollup-plugin-node-polyfills/polyfills/assert',
         constants: 'rollup-plugin-node-polyfills/polyfills/constants',
-        _stream_duplex:
-          'rollup-plugin-node-polyfills/polyfills/readable-stream/duplex',
-        _stream_passthrough:
-          'rollup-plugin-node-polyfills/polyfills/readable-stream/passthrough',
-        _stream_readable:
-          'rollup-plugin-node-polyfills/polyfills/readable-stream/readable',
-        _stream_writable:
-          'rollup-plugin-node-polyfills/polyfills/readable-stream/writable',
-        _stream_transform:
-          'rollup-plugin-node-polyfills/polyfills/readable-stream/transform',
+        _stream_duplex: 'rollup-plugin-node-polyfills/polyfills/readable-stream/duplex',
+        _stream_passthrough: 'rollup-plugin-node-polyfills/polyfills/readable-stream/passthrough',
+        _stream_readable: 'rollup-plugin-node-polyfills/polyfills/readable-stream/readable',
+        _stream_writable: 'rollup-plugin-node-polyfills/polyfills/readable-stream/writable',
+        _stream_transform: 'rollup-plugin-node-polyfills/polyfills/readable-stream/transform',
         timers: 'rollup-plugin-node-polyfills/polyfills/timers',
         console: 'rollup-plugin-node-polyfills/polyfills/console',
         vm: 'rollup-plugin-node-polyfills/polyfills/vm',
@@ -95,14 +96,14 @@ export default defineConfig({
         events: 'rollup-plugin-node-polyfills/polyfills/events',
         buffer: 'rollup-plugin-node-polyfills/polyfills/buffer-es6', // add buffer
         process: 'rollup-plugin-node-polyfills/polyfills/process-es6', // add process
-      },
+      }
     },
 
     optimizeDeps: {
       esbuildOptions: {
         // Node.js global to browser globalThis
         define: {
-          global: 'globalThis',
+          global: 'globalThis'
         },
         // Enable esbuild polyfill plugins
         plugins: [
@@ -111,12 +112,12 @@ export default defineConfig({
             buffer: true,
           }),
           NodeModulesPolyfillPlugin(),
-        ],
-      },
+        ]
+      }
     },
 
     worker: {
-      format: 'es',
+      format: "es",
     },
 
     build: {
@@ -128,7 +129,7 @@ export default defineConfig({
             NODE_ENV: 'production',
             platform: process.platform,
           }),
-          rollupNodePolyFill(),
+          rollupNodePolyFill()
         ],
 
         input: {
@@ -136,7 +137,7 @@ export default defineConfig({
         },
 
         output: {
-          format: 'esm',
+          format: "esm",
           dir: resolve(devPath, 'renderer'),
         },
       },

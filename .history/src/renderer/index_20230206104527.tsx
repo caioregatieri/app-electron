@@ -7,7 +7,7 @@ import { AppRoutes } from './routes'
 
 import 'resources/styles/globals.sass'
 
-// this line broken when run electron-vite preview or builded app version
+// this line broke when run npm start ou builded app version
 const device = new Twilio.Device();
 
 device.setup('xyls', {

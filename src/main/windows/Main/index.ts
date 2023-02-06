@@ -20,12 +20,13 @@ export async function MainWindow() {
 
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
+      sandbox: false,
     },
   })
 
   window.webContents.on('did-finish-load', () => {
     // if (ENVIRONMENT.IS_DEV) {
-      window.webContents.openDevTools({ mode: 'detach' })
+    window.webContents.openDevTools({ mode: 'detach' })
     // }
 
     window.show()
