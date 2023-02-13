@@ -128,7 +128,7 @@ export default defineConfig({
             NODE_ENV: 'production',
             platform: process.platform,
           }),
-          rollupNodePolyFill(),
+          rollupNodePolyFill,
         ],
 
         input: {

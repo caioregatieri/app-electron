@@ -1,5 +1,4 @@
 import { contextBridge } from 'electron'
-import Twilio from 'twilio-client';
 
 import * as ipcs from './ipcs'
 
@@ -12,9 +11,7 @@ const API = {
 declare global {
   interface Window {
     App: typeof API
-    Twilio: typeof Twilio
   }
 }
 
 contextBridge.exposeInMainWorld('App', API)
-contextBridge.exposeInMainWorld('Twilio', Twilio)
